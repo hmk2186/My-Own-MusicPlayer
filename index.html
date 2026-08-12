@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>The Himalayan Thump | Royal Enfield Leh-Ladakh Expedition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'enfield-black': '#121417',
+                        'enfield-dark': '#1C1E21',
+                        'enfield-metal': '#2C3036',
+                        'himalaya-blue': '#1E3A5F',
+                        'himalaya-sky': '#3B82F6',
+                        'snow-white': '#E8EEF5',
+                        'pine-green': '#2A4836',
+                        'prayer-red': '#9B2C2C',
+                        'prayer-yellow': '#D69E2E',
+                        'prayer-blue': '#2B6CB0',
+                        'prayer-green': '#2F855A',
+                        'bullet-copper': '#C05621'
+                    },
+                    fontFamily: {
+                        title: ['Cinzel', 'serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                        mono: ['Courier Prime', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0c0e11;
+            color: #E8EEF5;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(28, 30, 33, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-panel-glow {
+            background: rgba(28, 30, 33, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(192, 86, 33, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(192, 86, 33, 0.1);
+        }
+
+        /* Prayer Flag Flutter Animation */
+        @keyframes flutter {
+            0%, 100% { transform: skewY(0deg) rotate(0deg) translateY(0); }
+            25% { transform: skewY(-3deg) rotate(-2deg) translateY(-2px); }
+            50% { transform: skewY(2deg) rotate(1deg) translateY(1px); }
+            75% { transform: skewY(-1deg) rotate(-1deg) translateY(-1px); }
+        }
+
+        .prayer-flag {
+            animation: flutter 3s ease-in-out infinite;
+            transform-origin: top left;
+        }
+
+        .prayer-flag:nth-child(2) { animation-delay: 0.4s; }
+        .prayer-flag:nth-child(3) { animation-delay: 0.8s; }
+        .prayer-flag:nth-child(4) { animation-delay: 1.2s; }
+        .prayer-flag:nth-child(5) { animation-delay: 1.6s; }
+
+        .bg-wave-bar {
+            width: 100%;
+            background: linear-gradient(to top, rgba(192,86,33,0.5), transparent);
+            border-radius: 20px 20px 0 0;
+            animation: bg-wave 3s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        .writing-vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            white-space: nowrap;
+        }
+
+        /* Speedometer Needle Smooth Transition */
+        .gauge-needle {
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: 50% 85%;
+        }
+
+        /* Vibration / Pulse Effect for Rev engine */
+        @keyframes engine-vibe {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-1.5px, 1px) rotate(-0.2deg); }
+            40% { transform: translate(1.5px, -1px) rotate(0.2deg); }
+            60% { transform: translate(-1px, -1.5px) rotate(-0.1deg); }
+            80% { transform: translate(1px, 1.5px) rotate(0.1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .revving {
+            animation: engine-vibe 0.08s infinite;
+        }
+
+        /* Exhaust Smoke Particles */
+        @keyframes smoke-puff {
+            0% { opacity: 0.8; transform: translate(0, 0) scale(0.6); }
+            100% { opacity: 0; transform: translate(-80px, -40px) scale(2.5); }
+        }
+
+        .smoke-particle {
+            position: absolute;
+            background: rgba(220, 225, 230, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: smoke-puff 1.2s ease-out forwards;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121417;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2C3036;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C05621;
+        }
+
+        /* Vinyl/Disc Spin */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+
+        /* Equalizer Bar Animation */
+        @keyframes eq-bounce {
+            0%, 100% { height: 15%; }
+            50% { height: 100%; }
+        }
+        .eq-bar-1 { animation: eq-bounce 0.7s ease-in-out infinite; }
+        .eq-bar-2 { animation: eq-bounce 1.1s ease-in-out infinite; }
+        .eq-bar-3 { animation: eq-bounce 0.8s ease-in-out infinite; }
+        .eq-bar-4 { animation: eq-bounce 1.3s ease-in-out infinite; }
+        .eq-bar-5 { animation: eq-bounce 0.9s ease-in-out infinite; }
+        .eq-bar-6 { animation: eq-bounce 1.2s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-bullet-copper selection:text-white">
+
+
+    <!-- Background Canvas & Cinematic Landscape Image -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Main Cinematic Himalayan background photo -->
+        <img src="himalayan_bg.jpg" alt="Himalayas" class="w-full h-full object-cover opacity-30 filter brightness-75 contrast-125">
+        <!-- Vignette and dark color overlay to keep text completely readable -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0c0e11]/80 via-transparent to-[#0c0e11]/90"></div>
+        <div class="absolute inset-0 bg-enfield-black/30 mix-blend-multiply"></div>
+
+        <!-- Ambient Glow from Headlight/Campfire -->
+        <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-bullet-copper/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Top Navigation & Live Telemetry Bar -->
+    <header class="relative z-20 w-full border-b border-white/10 bg-enfield-black/80 backdrop-blur-md">
+        <!-- Tibetan Prayer Flags String Header -->
+        <div class="flex justify-between items-center w-full overflow-hidden h-3 bg-enfield-dark border-b border-white/5 px-2">
+            <div class="prayer-flag w-full h-full bg-prayer-blue opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-yellow opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-green opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-red opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-snow-white opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-blue opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-yellow opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-green opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-prayer-red opacity-90 mx-0.5 rounded-b-sm"></div>
+            <div class="prayer-flag w-full h-full bg-snow-white opacity-90 mx-0.5 rounded-b-sm"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
+            <!-- Brand Badge -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border-2 border-bullet-copper bg-enfield-dark flex items-center justify-center text-bullet-copper shadow-lg shadow-bullet-copper/20">
+                    <i class="fa-solid fa-compass text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-bullet-copper uppercase block">Established 1901 • Ladakh Chapter</span>
+                    <h1 class="text-xl font-title font-bold tracking-wider text-snow-white">THE HIMALAYAN THUMP</h1>
+                </div>
+            </div>
+
+            <!-- Expedition Telemetry Pills -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4 font-tech text-xs sm:text-sm">
+                <button onclick="document.getElementById('playlist-modal').classList.remove('hidden')" class="flex items-center gap-1.5 bg-enfield-dark/90 hover:bg-bullet-copper/20 px-2.5 py-1.5 rounded-full border border-bullet-copper/40 transition">
+                    <i class="fa-solid fa-music text-bullet-copper"></i>
+                    <span class="text-snow-white font-bold font-mono text-[10px] sm:text-xs">PLAYLIST</span>
+                </button>
+                <div class="flex items-center gap-1.5 bg-enfield-dark/90 px-2.5 py-1.5 rounded-full border border-white/10">
+                    <i class="fa-solid fa-mountain text-bullet-copper"></i>
+                    <span class="hidden sm:inline text-gray-400">ALTITUDE:</span>
+                    <span class="text-snow-white font-bold font-mono" id="alt-counter">18,380 FT</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 bg-enfield-dark/90 px-2.5 py-1.5 rounded-full border border-white/10">
+                    <i class="fa-solid fa-temperature-low text-blue-400"></i>
+                    <span class="text-gray-400">TEMP:</span>
+                    <span class="text-snow-white font-bold font-mono">-4°C (Khardung La)</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-enfield-dark/90 px-2.5 py-1.5 rounded-full border border-white/10">
+                    <i class="fa-solid fa-route text-amber-500"></i>
+                    <span class="hidden sm:inline text-gray-400">ODOMETER:</span>
+                    <span class="text-bullet-copper font-bold font-mono">3,520 KM</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10 mb-52 sm:mb-28">
+
+        <!-- Hero Grid: Speedometer & Central Visual -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Column: Title & Throttle Controls (5 cols) -->
+            <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bullet-copper/20 border border-bullet-copper/40 text-bullet-copper text-xs font-mono uppercase tracking-widest">
+                    <span class="w-2 h-2 rounded-full bg-bullet-copper animate-ping"></span>
+                    J-Series Long-Stroke 350cc Engine
+                </div>
+
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-title font-black text-snow-white leading-tight tracking-tight">
+                    MADE LIKE A GUN. <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-bullet-copper via-amber-400 to-snow-white">BUILT FOR THE PASS.</span>
+                </h2>
+
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-sans max-w-xl mx-auto lg:mx-0">
+                    Feel the rhythmic 350cc single-cylinder heartbeat reverberating through snow-capped valleys, river water crossings, and the highest motorable passes on planet Earth.
+                </p>
+
+                <!-- Interactive Throttle Button & Key hint -->
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <button id="rev-btn" onclick="triggerEngineRev()" class="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-bullet-copper to-amber-600 font-tech font-bold text-lg text-white shadow-xl shadow-bullet-copper/30 hover:shadow-bullet-copper/50 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-3 border border-amber-300/30">
+                        <i class="fa-solid fa-gauge-high text-xl group-hover:rotate-45 transition-transform"></i>
+                        <span>REV THROTTLE (DUG-DUG)</span>
+                    </button>
+                    <span class="text-xs font-mono text-gray-400 flex items-center gap-1.5">
+                        <kbd class="px-2 py-1 bg-enfield-dark border border-white/20 rounded text-gray-200">SPACEBAR</kbd> to Rev
+                    </span>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Bike Graphic & Speedometer (7 cols) -->
+            <div class="lg:col-span-7 flex flex-col md:flex-row items-center justify-center gap-6 glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden" id="bike-display">
+                
+                <!-- Speedometer Dial Widget -->
+                <div class="relative w-44 h-44 flex-shrink-0 bg-enfield-black rounded-full border-4 border-enfield-metal shadow-2xl p-2 flex items-center justify-center border-t-bullet-copper">
+                    <!-- Gauge Dial SVG -->
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        <!-- Tick marks -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#2C3036" stroke-width="6" stroke-dasharray="188 62" stroke-dashoffset="0" />
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#C05621" stroke-width="6" stroke-dasharray="60 190" stroke-dashoffset="-128" />
+                    </svg>
+
+                    <!-- Speedometer Numbers -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center font-mono text-center">
+                        <span class="text-xs text-gray-500 uppercase tracking-widest mt-4">RPM x1000</span>
+                        <span class="text-3xl font-tech font-bold text-snow-white" id="rpm-text">1.2</span>
+                        <span class="text-[10px] text-bullet-copper font-bold tracking-widest">HUNTER 350</span>
+                    </div>
+
+                    <!-- Needle -->
+                    <div id="gauge-needle" class="gauge-needle absolute w-1 h-16 bg-gradient-to-t from-transparent via-red-600 to-red-500 rounded-full bottom-[50%] left-[calc(50%-2px)] shadow-lg origin-bottom" style="transform: rotate(-120deg);"></div>
+                    <div class="absolute w-5 h-5 bg-bullet-copper rounded-full border-2 border-enfield-black z-10 shadow"></div>
+                </div>
+
+                <!-- Central SVG Motorcycle Visual Composition -->
+                <div class="relative w-full h-64 flex items-center justify-center">
+                    <!-- Headlight Beam Effect -->
+                    <div id="headlight-beam" class="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-32 bg-gradient-to-r from-amber-200/20 via-amber-100/5 to-transparent clip-triangle blur-md pointer-events-none transition-opacity duration-300"></div>
+                    <!-- Cinematic Image of the Royal Enfield Hunter 350 -->
+                    <div class="relative w-full h-full max-w-md mx-auto rounded-xl overflow-hidden shadow-2xl border border-white/10 group mt-4">
+                        <img src="bike.jpg" alt="Royal Enfield Hunter 350" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-enfield-black/80 to-transparent"></div>
+                    </div>
+
+                    <!-- Exhaust Smoke Emitter Point -->
+                    <div id="exhaust-point" class="absolute left-[18%] bottom-[22%] w-2 h-2"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Step 1 Phrase Ticker / Quote Strip -->
+        <section class="glass-panel-glow rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+            <div class="flex items-center gap-3 mb-2">
+                <i class="fa-solid fa-quote-left text-bullet-copper text-xl"></i>
+                <span class="text-xs font-mono uppercase tracking-widest text-bullet-copper">Rider Dispatch • Voice of the Passes</span>
+            </div>
+
+            <!-- Carousel Phrase Display -->
+            <div class="min-h-[60px] flex items-center justify-between gap-4">
+                <p id="quote-text" class="text-lg sm:text-xl md:text-2xl font-tech font-bold text-snow-white transition-all duration-500 transform translate-y-0 opacity-100">
+                    "Thump of the Long Stroke Single — 350cc pure mechanical pulse through the soul."
+                </p>
+
+                <!-- Step Controls -->
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <button onclick="prevQuote()" class="w-8 h-8 rounded-full bg-enfield-dark border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-bullet-copper transition">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="nextQuote()" class="w-8 h-8 rounded-full bg-enfield-dark border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-bullet-copper transition">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide Indicators -->
+            <div class="flex gap-1.5 mt-3" id="quote-dots"></div>
+        </section>
+
+        <!-- Cultural DNA Grid & Interactive Soundboard -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Card 1: Sacred Mountain Pitstops -->
+            <div class="glass-panel rounded-2xl p-6 border border-white/10 space-y-4 hover:border-bullet-copper/50 transition-all duration-300">
+                <div class="flex justify-between items-start">
+                    <div class="w-10 h-10 rounded-xl bg-bullet-copper/20 text-bullet-copper flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <span class="text-[10px] font-mono bg-white/5 border border-white/10 px-2 py-1 rounded text-gray-400">WAYPOINT #04</span>
+                </div>
+                <h3 class="text-xl font-title font-bold text-snow-white">Gurudwara Pathar Sahib & Maggi Stalls</h3>
+                <p class="text-sm text-gray-300 leading-relaxed font-sans">
+                    Steaming hot Ginger-Lemon-Honey tea served by army jawans, followed by piping hot piping altitude Maggi at 18,380ft on Khardung La. No meal on earth ever tasted so earned.
+                </p>
+                <div class="pt-2 border-t border-white/10 flex justify-between text-xs font-mono text-gray-400">
+                    <span>ALTITUDE: 12,000 FT</span>
+                    <span class="text-amber-400">JULLEY! 🙏</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Mechanical Heartbeat -->
+            <div class="glass-panel rounded-2xl p-6 border border-white/10 space-y-4 hover:border-bullet-copper/50 transition-all duration-300">
+                <div class="flex justify-between items-start">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <span class="text-[10px] font-mono bg-white/5 border border-white/10 px-2 py-1 rounded text-gray-400">ENGINE SPEC</span>
+                </div>
+                <h3 class="text-xl font-title font-bold text-snow-white">The Long-Stroke Pulse</h3>
+                <p class="text-sm text-gray-300 leading-relaxed font-sans">
+                    Air-oil cooled 349cc single cylinder generating 27 Nm of low-end torque. When oxygen drops at high passes, the heavy flywheel rhythm keeps you chugging up the mountain.
+                </p>
+                <div class="pt-2 border-t border-white/10 flex justify-between text-xs font-mono text-gray-400">
+                    <span>TORQUE: 27Nm @ 4000RPM</span>
+                    <span class="text-bullet-copper">DUG-DUG-DUG</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Water Crossings & Magnetic Hill -->
+            <div class="glass-panel rounded-2xl p-6 border border-white/10 space-y-4 hover:border-bullet-copper/50 transition-all duration-300">
+                <div class="flex justify-between items-start">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <span class="text-[10px] font-mono bg-white/5 border border-white/10 px-2 py-1 rounded text-gray-400">TERRAIN ALERT</span>
+                </div>
+                <h3 class="text-xl font-title font-bold text-snow-white">Chang La Water Crossings</h3>
+                <p class="text-sm text-gray-300 leading-relaxed font-sans">
+                    Freezing glacial snowmelt rushing across unpaved mountain trails. Half-clutch, full throttle, lift your knees, and trust the long-stroke momentum through the rocks.
+                </p>
+                <div class="pt-2 border-t border-white/10 flex justify-between text-xs font-mono text-gray-400">
+                    <span>WATER TEMP: 1°C</span>
+                    <span class="text-blue-400">KEEP THROTTLE ON</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Interactive Audio FX Soundboard Section -->
+        <section class="glass-panel rounded-2xl p-6 border border-white/10 space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div>
+                    <h3 class="text-lg font-title font-bold text-snow-white flex items-center gap-2">
+                        <i class="fa-solid fa-volume-high text-bullet-copper"></i>
+                        EXPEDITION SOUNDBOARD & AMBIENCE
+                    </h3>
+                    <p class="text-xs text-gray-400">Synthesized live via Web Audio API — click to trigger atmospheric mountain interactions</p>
+                </div>
+                <span class="text-xs font-mono text-bullet-copper bg-bullet-copper/10 px-3 py-1 rounded-full border border-bullet-copper/30">REALTIME SYNTHESIS</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+                <button onclick="playEngineThump()" class="p-4 rounded-xl bg-enfield-dark hover:bg-bullet-copper/20 border border-white/10 hover:border-bullet-copper text-left transition group">
+                    <i class="fa-solid fa-motorcycle text-xl text-bullet-copper mb-2 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-tech font-bold text-snow-white">350cc Exhaust Thump</div>
+                    <div class="text-[10px] text-gray-400 font-mono">Engine Pulse</div>
+                </button>
+
+                <button onclick="playPrayerChime()" class="p-4 rounded-xl bg-enfield-dark hover:bg-amber-500/20 border border-white/10 hover:border-amber-500 text-left transition group">
+                    <i class="fa-solid fa-bell text-xl text-amber-400 mb-2 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-tech font-bold text-snow-white">Temple Bell Chime</div>
+                    <div class="text-[10px] text-gray-400 font-mono">Monastery Resonance</div>
+                </button>
+
+                <button onclick="playMountainWind()" class="p-4 rounded-xl bg-enfield-dark hover:bg-blue-500/20 border border-white/10 hover:border-blue-500 text-left transition group">
+                    <i class="fa-solid fa-wind text-xl text-blue-400 mb-2 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-tech font-bold text-snow-white">Himalayan Crosswind</div>
+                    <div class="text-[10px] text-gray-400 font-mono">High Altitude Gust</div>
+                </button>
+
+                <button onclick="playHorn()" class="p-4 rounded-xl bg-enfield-dark hover:bg-red-500/20 border border-white/10 hover:border-red-500 text-left transition group">
+                    <i class="fa-solid fa-bullhorn text-xl text-red-400 mb-2 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-tech font-bold text-snow-white">Pass Horn ("Blow Horn")</div>
+                    <div class="text-[10px] text-gray-400 font-mono">Blind Curve Warning</div>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Playlist Changer Modal -->
+    <div id="playlist-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-panel-glow max-w-md w-full rounded-2xl p-6 border border-white/10 shadow-2xl relative">
+            <button onclick="document.getElementById('playlist-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-title font-bold text-snow-white mb-4"><i class="fa-solid fa-list-music text-bullet-copper mr-2"></i> Change Playlist</h3>
+            <p class="text-sm text-gray-300 font-sans mb-6">Enter a YouTube Playlist ID or URL to ride to your own rhythm.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">PLAYLIST ID OR URL</label>
+                    <input type="text" id="custom-playlist-input" placeholder="e.g. PLdAGrZeekdN83NlO57JYAMry7a1B69MxZ" class="w-full bg-enfield-dark border border-white/20 rounded-lg px-3 py-2 text-snow-white font-mono text-sm focus:border-bullet-copper focus:outline-none focus:ring-1 focus:ring-bullet-copper">
+                </div>
+                
+                <div class="text-xs text-gray-400 font-sans mt-2">
+                    Quick Select:
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <button onclick="document.getElementById('custom-playlist-input').value = 'PLdAGrZeekdN83NlO57JYAMry7a1B69MxZ'" class="px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs transition">Royal Enfield Ride</button>
+                        <button onclick="document.getElementById('custom-playlist-input').value = 'PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG'" class="px-2 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs transition">Classic Rock Thump</button>
+                    </div>
+                </div>
+
+                <button onclick="loadCustomPlaylist()" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-bullet-copper to-amber-600 font-tech font-bold text-white shadow-lg shadow-bullet-copper/30 hover:shadow-bullet-copper/50 active:scale-95 transition-all mt-4">
+                    LOAD PLAYLIST
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Glassmorphic YouTube Music Player Footer -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 pointer-events-none">
+        <div class="max-w-4xl mx-auto glass-panel-glow rounded-2xl p-3 sm:p-4 pointer-events-auto border border-white/15 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
+            
+            <!-- Hidden YouTube Player Container (Must stay in viewport to prevent browser pausing it!) -->
+            <div id="yt-container" style="position: absolute; top: 10px; left: 10px; width: 200px; height: 200px; opacity: 0.01; overflow: hidden; pointer-events: none; z-index: -10;">
+                <div id="youtube-player"></div>
+            </div>
+            <div id="youtube-exhaust-player" class="hidden w-0 h-0 opacity-0 pointer-events-none"></div>
+
+            <!-- Track Info & Visualizer Animation -->
+            <div class="flex items-center gap-3 w-full sm:w-auto min-w-0">
+                <div class="relative w-12 h-12 rounded-xl bg-enfield-dark border border-bullet-copper/40 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <img id="track-thumbnail" src="" class="hidden w-full h-full object-cover z-10">
+                    <i class="fa-solid fa-compact-disc text-bullet-copper text-2xl animate-spin-slow" id="disc-icon"></i>
+                    <div class="absolute inset-0 bg-bullet-copper/10"></div>
+                </div>
+
+                <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2">
+                        <span id="player-status-badge" class="px-2 py-0.5 rounded text-[10px] font-mono bg-bullet-copper/20 text-bullet-copper border border-bullet-copper/30 uppercase">
+                            YOUTUBE PLAYLIST
+                        </span>
+                        <!-- EQ Bars (Waves) -->
+                        <div class="flex items-end gap-[3px] h-5 opacity-80" id="eq-container">
+                            <span class="w-1.5 bg-bullet-copper rounded-t-sm eq-bar-1"></span>
+                            <span class="w-1.5 bg-amber-500 rounded-t-sm eq-bar-2"></span>
+                            <span class="w-1.5 bg-bullet-copper rounded-t-sm eq-bar-3"></span>
+                            <span class="w-1.5 bg-amber-500 rounded-t-sm eq-bar-4"></span>
+                            <span class="w-1.5 bg-bullet-copper rounded-t-sm eq-bar-5"></span>
+                            <span class="w-1.5 bg-amber-500 rounded-t-sm eq-bar-6"></span>
+                        </div>
+                    </div>
+                    <h4 id="track-title" class="text-sm font-tech font-bold text-snow-white truncate max-w-[220px] sm:max-w-[280px]">
+                        Loading Ladakh Highway Playlist...
+                    </h4>
+                    <p id="track-author" class="text-xs text-gray-400 font-mono truncate">Royal Enfield Ride Tapes</p>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="flex flex-col items-center gap-1.5 w-full sm:w-auto">
+                <div class="flex items-center gap-4">
+                    <button onclick="prevTrack()" class="text-gray-300 hover:text-bullet-copper transition p-2 text-sm">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+                    
+                    <button id="play-pause-btn" onclick="togglePlayPause()" class="w-10 h-10 rounded-full bg-bullet-copper text-white flex items-center justify-center shadow-lg shadow-bullet-copper/30 hover:scale-105 active:scale-95 transition">
+                        <i id="play-icon" class="fa-solid fa-play text-sm ml-0.5"></i>
+                    </button>
+
+                    <button onclick="nextTrack()" class="text-gray-300 hover:text-bullet-copper transition p-2 text-sm">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+                </div>
+
+                <!-- Progress Scrub Bar -->
+                <div class="flex items-center gap-2 w-full sm:w-64 font-mono text-[10px] text-gray-400">
+                    <span id="curr-time">0:00</span>
+                    <div class="flex-1 h-1.5 bg-enfield-dark rounded-full overflow-hidden cursor-pointer relative" id="progress-bar-container" onclick="seekTo(event)">
+                        <div id="progress-bar" class="h-full bg-gradient-to-r from-bullet-copper to-amber-400 w-0 rounded-full transition-all duration-200"></div>
+                    </div>
+                    <span id="total-time">0:00</span>
+                </div>
+            </div>
+
+            <!-- Volume Control & Unmute Overlay Hint -->
+            <div class="flex items-center gap-2 text-xs text-gray-400 font-mono mt-2 sm:mt-0">
+                <button onclick="toggleMute()" class="hover:text-white transition">
+                    <i id="volume-icon" class="fa-solid fa-volume-high text-bullet-copper"></i>
+                </button>
+                <input type="range" id="volume-slider" min="0" max="100" value="80" oninput="setVolume(this.value)" class="w-24 h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer accent-bullet-copper outline-none">
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        /* STEP 1 CULTURAL RESEARCH DATA & PHRASES */
+        const CULTURAL_PHRASES = [
+            "Thump of the Long Stroke Single — 350cc pure mechanical pulse through the soul.",
+            "Maggi tastes 10x better at 18,380ft on Khardung La Pass in -4°C winds.",
+            "Dug-Dug-Dug: The heartbeat that conquers the Mighty Himalayas.",
+            "Prayer flags fluttering in the icy mountain crosswinds... Julley!",
+            "Chai break at Gurudwara Pathar Sahib before tackling Magnetic Hill.",
+            "Made like a gun, built for the highest motorable passes on Earth.",
+            "Saddle sore, ice-bitten fingers, but the rider's soul has never been lighter.",
+            "Pangong Tso blue that defies every digital camera sensor.",
+            "Water crossings at Chang La — clutch half, throttle full, keep moving!",
+            "Ride hard or go home — the mountain determines who stays."
+        ];
+
+        let currentQuoteIndex = 0;
+        let quoteInterval = null;
+
+        // Web Audio Context initialization
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        // Initialize Audio Context on first click anywhere
+        document.addEventListener('click', function unlockAudio() {
+            getAudioContext();
+            // Unmute YouTube player if first user interaction
+            if (ytPlayer && typeof ytPlayer.unMute === 'function' && !isPlayerMuted) {
+                ytPlayer.unMute();
+            }
+        }, { once: true });
+
+        /* STEP 2.7 WEB AUDIO SYNTHESIZER FOR SOUNDBOARD & REV ENGINE */
+        function playEngineThump() {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            // Master gain to boost overall volume heavily
+            const masterGain = ctx.createGain();
+            masterGain.gain.value = 3.0; // 300% volume for strong impact
+            masterGain.connect(ctx.destination);
+
+            // Synthesis of aggressive 350cc Motorcycle Thump pulse
+            for (let i = 0; i < 4; i++) {
+                const delay = i * 0.12;
+                
+                // Low deep thump (Sub Oscillator)
+                const osc = ctx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(80, now + delay);
+                osc.frequency.exponentialRampToValueAtTime(40, now + delay + 0.1);
+
+                // Aggressive crackle (Sawtooth)
+                const crackle = ctx.createOscillator();
+                crackle.type = 'sawtooth';
+                crackle.frequency.setValueAtTime(150, now + delay);
+                crackle.frequency.exponentialRampToValueAtTime(60, now + delay + 0.1);
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(500, now + delay); // Let more mid-frequencies through
+                filter.frequency.exponentialRampToValueAtTime(100, now + delay + 0.1);
+
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(2.0, now + delay); // Very strong initial hit
+                gain.gain.exponentialRampToValueAtTime(0.01, now + delay + 0.11);
+
+                osc.connect(filter);
+                crackle.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start(now + delay);
+                crackle.start(now + delay);
+                osc.stop(now + delay + 0.12);
+                crackle.stop(now + delay + 0.12);
+            }
+
+            // Visual Exhaust Smoke Particle Trigger
+            createSmokeParticle();
+        }
+
+        function playPrayerChime() {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+                gain.gain.setValueAtTime(0.2, now + idx * 0.08);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 1.8);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(now + idx * 0.08);
+                osc.stop(now + idx * 0.08 + 1.8);
+            });
+        }
+
+        function playMountainWind() {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            // White noise buffer generator
+            const bufferSize = ctx.sampleRate * 2;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(300, now);
+            filter.frequency.exponentialRampToValueAtTime(800, now + 1.0);
+            filter.frequency.exponentialRampToValueAtTime(250, now + 2.0);
+            filter.Q.value = 3.0;
+
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.01, now);
+            gain.gain.linearRampToValueAtTime(0.25, now + 1.0);
+            gain.gain.linearRampToValueAtTime(0.001, now + 2.0);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+
+            noise.start(now);
+            noise.stop(now + 2.0);
+        }
+
+        function playHorn() {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc1.type = 'sawtooth';
+            osc2.type = 'sawtooth';
+
+            osc1.frequency.setValueAtTime(370, now);
+            osc2.frequency.setValueAtTime(415, now);
+
+            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc1.start(now);
+            osc2.start(now);
+            osc1.stop(now + 0.5);
+            osc2.stop(now + 0.5);
+        }
+
+        // Throttle Rev Interaction
+        function triggerEngineRev() {
+            playEngineThump();
+
+            // Gauge needle animation
+            const needle = document.getElementById('gauge-needle');
+            const rpmText = document.getElementById('rpm-text');
+            const bikeDisplay = document.getElementById('bike-display');
+            const headlightBeam = document.getElementById('headlight-beam');
+
+            if (needle) {
+                needle.style.transform = 'rotate(45deg)';
+                if (rpmText) rpmText.innerText = '6.8';
+                if (bikeDisplay) bikeDisplay.classList.add('revving');
+                if (headlightBeam) headlightBeam.style.opacity = '1';
+
+                setTimeout(() => {
+                    needle.style.transform = 'rotate(-120deg)';
+                    if (rpmText) rpmText.innerText = '1.2';
+                    if (bikeDisplay) bikeDisplay.classList.remove('revving');
+                    if (headlightBeam) headlightBeam.style.opacity = '0.6';
+                }, 400);
+            }
+
+            // Wheel rotate spin effect
+            const backWheel = document.getElementById('back-wheel');
+            const frontWheel = document.getElementById('front-wheel');
+            if (backWheel && frontWheel) {
+                backWheel.style.transform = 'rotate(360deg)';
+                frontWheel.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    backWheel.style.transform = 'rotate(0deg)';
+                    frontWheel.style.transform = 'rotate(0deg)';
+                }, 700);
+            }
+        }
+
+        // Keypress Listener for Spacebar Rev and P key play/pause
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target === document.body) {
+                e.preventDefault();
+                triggerEngineRev();
+            }
+            if (e.code === 'KeyP' || e.key === 'p' || e.key === 'P') {
+                // Do not trigger play/pause if user is typing in the input box
+                if (document.activeElement && document.activeElement.tagName === 'INPUT') {
+                    return;
+                }
+                e.preventDefault();
+                togglePlayPause();
+            }
+        });
+
+        // Particle Exhaust Effect
+        function createSmokeParticle() {
+            const point = document.getElementById('exhaust-point');
+            if (!point) return;
+
+            const rect = point.getBoundingClientRect();
+            for (let i = 0; i < 3; i++) {
+                const p = document.createElement('div');
+                p.className = 'smoke-particle';
+                const size = Math.random() * 14 + 10;
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${rect.left + window.scrollX}px`;
+                p.style.top = `${rect.top + window.scrollY}px`;
+
+                document.body.appendChild(p);
+
+                setTimeout(() => {
+                    p.remove();
+                }, 1200);
+            }
+        }
+
+        /* ROTATING QUOTE STRIP LOGIC */
+        function renderQuoteDots() {
+            const container = document.getElementById('quote-dots');
+            if (!container) return;
+            container.innerHTML = CULTURAL_PHRASES.map((_, i) => `
+                <button onclick="goToQuote(${i})" class="h-1.5 rounded-full transition-all duration-300 ${i === currentQuoteIndex ? 'w-6 bg-bullet-copper' : 'w-1.5 bg-white/20 hover:bg-white/40'}"></button>
+            `).join('');
+        }
+
+        function updateQuoteDisplay() {
+            const textEl = document.getElementById('quote-text');
+            if (!textEl) return;
+
+            textEl.classList.add('opacity-0', 'translate-y-2');
+
+            setTimeout(() => {
+                textEl.innerText = `"${CULTURAL_PHRASES[currentQuoteIndex]}"`;
+                textEl.classList.remove('opacity-0', 'translate-y-2');
+                renderQuoteDots();
+            }, 250);
+        }
+
+        function nextQuote() {
+            currentQuoteIndex = (currentQuoteIndex + 1) % CULTURAL_PHRASES.length;
+            updateQuoteDisplay();
+        }
+
+        function prevQuote() {
+            currentQuoteIndex = (currentQuoteIndex - 1 + CULTURAL_PHRASES.length) % CULTURAL_PHRASES.length;
+            updateQuoteDisplay();
+        }
+
+        function goToQuote(index) {
+            currentQuoteIndex = index;
+            updateQuoteDisplay();
+        }
+
+        function startQuoteTimer() {
+            if (quoteInterval) clearInterval(quoteInterval);
+            quoteInterval = setInterval(nextQuote, 5000);
+        }
+
+        /* STEP 2.6 YOUTUBE IFRAME PLAYER API INTEGRATION */
+        let currentPlaylistId = 'PLNB8ZN3G4h0U'; // User's playlist ID
+        let ytPlayer = null;
+        let isPlaying = false;
+        let progressTimer = null;
+        let isPlayerMuted = false;
+
+        // Load YouTube IFrame API Script
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function extractPlaylistId(urlOrId) {
+            if (urlOrId.includes('list=')) {
+                const urlParams = new URLSearchParams(urlOrId.split('?')[1]);
+                return urlParams.get('list');
+            }
+            return urlOrId.trim();
+        }
+
+        function loadCustomPlaylist() {
+            const inputVal = document.getElementById('custom-playlist-input').value;
+            if (!inputVal) return;
+            const newId = extractPlaylistId(inputVal);
+            if (newId) {
+                currentPlaylistId = newId;
+                
+                // Nuclear Option: Destroy the old player completely
+                if (ytPlayer && typeof ytPlayer.destroy === 'function') {
+                    ytPlayer.destroy();
+                }
+
+                // Re-create the div because destroy() deletes it from the DOM
+                const container = document.getElementById('yt-container');
+                if (container) {
+                    container.innerHTML = '<div id="youtube-player"></div>';
+                }
+
+                // Reset UI to show it is loading the new playlist
+                document.getElementById('track-title').innerText = "Loading new playlist...";
+                document.getElementById('track-author').innerText = "Please wait";
+                document.getElementById('track-thumbnail').classList.add('hidden');
+                document.getElementById('disc-icon').classList.remove('hidden');
+
+                // Initialize a brand new player with the new Playlist ID
+                const playerVars = {
+                    listType: 'playlist',
+                    list: currentPlaylistId,
+                    autoplay: 1, // Force autoplay on new load
+                    controls: 0,
+                    enablejsapi: 1
+                };
+                if (window.location.protocol !== 'file:') {
+                    playerVars.origin = window.location.origin;
+                }
+
+                ytPlayer = new YT.Player('youtube-player', {
+                    height: '200',
+                    width: '200',
+                    playerVars: playerVars,
+                    events: {
+                        'onReady': (event) => {
+                            onPlayerReady(event);
+                            event.target.playVideo(); // Force play when ready
+                        },
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+
+                document.getElementById('playlist-modal').classList.add('hidden');
+            }
+        }
+
+        function onYouTubeIframeAPIReady() {
+            const playerVars = {
+                listType: 'playlist',
+                list: currentPlaylistId,
+                autoplay: 0,
+                controls: 0,
+                enablejsapi: 1
+            };
+            if (window.location.protocol !== 'file:') {
+                playerVars.origin = window.location.origin;
+            }
+
+            try {
+                ytPlayer = new YT.Player('youtube-player', {
+                    height: '200',
+                    width: '200',
+                    playerVars: playerVars,
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+            } catch (err) {
+                console.warn('YouTube Player load error:', err);
+                showPlayerFallbackState('YouTube API Error');
+            }
+        }
+
+        function onPlayerReady(event) {
+            ytPlayer.setVolume(80);
+            updateTrackInfo();
+            startProgressLoop();
+        }
+
+        function onPlayerStateChange(event) {
+            const playIcon = document.getElementById('play-icon');
+            const discIcon = document.getElementById('disc-icon');
+            const eqContainer = document.getElementById('eq-container');
+            const badge = document.getElementById('player-status-badge');
+
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                if (playIcon) playIcon.className = 'fa-solid fa-pause text-sm';
+                if (discIcon) discIcon.classList.add('animate-spin-slow');
+                if (eqContainer) eqContainer.classList.remove('opacity-20');
+                
+                // Revert any error state badge
+                if (badge) {
+                    badge.innerText = 'FM 91.2';
+                    badge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-bullet-copper/20 text-bullet-copper border border-bullet-copper/30';
+                }
+                updateTrackInfo();
+            } else {
+                isPlaying = false;
+                if (playIcon) playIcon.className = 'fa-solid fa-play text-sm ml-0.5';
+                if (discIcon) discIcon.classList.remove('animate-spin-slow');
+                if (eqContainer) eqContainer.classList.add('opacity-20');
+            }
+        }
+
+        function onPlayerError(event) {
+            console.warn('YouTube Player Error code:', event.data);
+            let reason = 'Playlist unavailable';
+            if (event.data === 150 || event.data === 101) {
+                reason = 'Embedding disabled. Skipping...';
+                
+                // Auto-skip unplayable songs after 2 seconds
+                setTimeout(() => {
+                    if (ytPlayer && typeof ytPlayer.nextVideo === 'function') {
+                        ytPlayer.nextVideo();
+                        setTimeout(() => ytPlayer.playVideo(), 500); // Force play to resume autoplay loop
+                    }
+                }, 2000);
+            } else if (event.data === 2) {
+                reason = 'Invalid ID';
+            } else if (event.data === 5) {
+                reason = 'HTML5 Player Error';
+            }
+            showPlayerFallbackState(reason);
+        }
+
+        function showPlayerFallbackState(msg) {
+            const titleEl = document.getElementById('track-title');
+            const authorEl = document.getElementById('track-author');
+            const badge = document.getElementById('player-status-badge');
+            if (titleEl) titleEl.innerText = msg || 'No playlist loaded';
+            if (authorEl) authorEl.innerText = 'Royal Enfield Ladakh Radio';
+            if (badge) {
+                badge.innerText = 'OFFLINE MODE';
+                badge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-red-900/30 text-red-400 border border-red-500/30 uppercase';
+            }
+        }
+
+        function togglePlayPause() {
+            getAudioContext(); // Ensure Audio Context is active
+            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') {
+                showPlayerFallbackState('Player initializing...');
+                return;
+            }
+
+            // Unmute on first play click
+            if (ytPlayer.isMuted()) {
+                ytPlayer.unMute();
+            }
+
+            const state = ytPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        }
+
+        function nextTrack() {
+            if (ytPlayer && typeof ytPlayer.nextVideo === 'function') {
+                ytPlayer.nextVideo();
+            }
+        }
+
+        function prevTrack() {
+            if (ytPlayer && typeof ytPlayer.previousVideo === 'function') {
+                ytPlayer.previousVideo();
+            }
+        }
+
+        function setVolume(val) {
+            if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
+                ytPlayer.setVolume(val);
+            }
+        }
+
+        function toggleMute() {
+            if (!ytPlayer || typeof ytPlayer.mute !== 'function') return;
+            const volIcon = document.getElementById('volume-icon');
+            if (isPlayerMuted) {
+                ytPlayer.unMute();
+                isPlayerMuted = false;
+                if (volIcon) volIcon.className = 'fa-solid fa-volume-high text-bullet-copper';
+            } else {
+                ytPlayer.mute();
+                isPlayerMuted = true;
+                if (volIcon) volIcon.className = 'fa-solid fa-volume-xmark text-gray-500';
+            }
+        }
+
+        function updateTrackInfo() {
+            if (!ytPlayer || typeof ytPlayer.getVideoData !== 'function') return;
+            const data = ytPlayer.getVideoData();
+            const titleEl = document.getElementById('track-title');
+            const authorEl = document.getElementById('track-author');
+            const thumbEl = document.getElementById('track-thumbnail');
+            const discIcon = document.getElementById('disc-icon');
+
+            if (data && data.title) {
+                if (titleEl) titleEl.innerText = data.title;
+                if (authorEl) authorEl.innerText = data.author || 'Royal Enfield Ride Soundtrack';
+                if (data.video_id) {
+                    if (thumbEl) {
+                        thumbEl.src = `https://img.youtube.com/vi/${data.video_id}/default.jpg`;
+                        thumbEl.classList.remove('hidden');
+                    }
+                    if (discIcon) {
+                        discIcon.classList.add('hidden');
+                    }
+                }
+            }
+        }
+
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function startProgressLoop() {
+            if (progressTimer) clearInterval(progressTimer);
+            progressTimer = setInterval(() => {
+                if (ytPlayer && typeof ytPlayer.getCurrentTime === 'function' && isPlaying) {
+                    const current = ytPlayer.getCurrentTime();
+                    const total = ytPlayer.getDuration();
+
+                    const currTimeEl = document.getElementById('curr-time');
+                    const totalTimeEl = document.getElementById('total-time');
+                    const progressBar = document.getElementById('progress-bar');
+
+                    if (currTimeEl) currTimeEl.innerText = formatTime(current);
+                    if (totalTimeEl) totalTimeEl.innerText = formatTime(total);
+
+                    if (progressBar && total > 0) {
+                        const pct = (current / total) * 100;
+                        progressBar.style.width = `${pct}%`;
+                    }
+                }
+            }, 500);
+        }
+
+        function seekTo(event) {
+            if (!ytPlayer || typeof ytPlayer.getDuration !== 'function') return;
+            const container = document.getElementById('progress-bar-container');
+            if (!container) return;
+            const rect = container.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const width = rect.width;
+            const duration = ytPlayer.getDuration();
+
+            if (duration > 0) {
+                const targetTime = (clickX / width) * duration;
+                ytPlayer.seekTo(targetTime, true);
+            }
+        }
+
+        // Snow / Particle Background Generator
+        function createParticleBackground() {
+            const container = document.getElementById('particle-bg');
+            if (!container) return;
+            const count = 40;
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 3 + 1;
+                particle.style.position = 'absolute';
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = '#E8EEF5';
+                particle.style.borderRadius = '50%';
+                particle.style.opacity = Math.random() * 0.6 + 0.2;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize Page Interactions
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuoteDots();
+            startQuoteTimer();
+            createParticleBackground();
+        });
+    </script>
+</body>
+</html>
