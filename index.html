@@ -219,6 +219,10 @@
                     <i class="fa-solid fa-music text-bullet-copper"></i>
                     <span class="text-snow-white font-bold font-mono text-[10px] sm:text-xs">PLAYLIST</span>
                 </button>
+                <button onclick="openTracksModal()" class="flex items-center gap-1.5 bg-enfield-dark/90 hover:bg-bullet-copper/20 px-2.5 py-1.5 rounded-full border border-bullet-copper/40 transition">
+                    <i class="fa-solid fa-list-ul text-bullet-copper"></i>
+                    <span class="text-snow-white font-bold font-mono text-[10px] sm:text-xs">TRACKS</span>
+                </button>
                 <div class="flex items-center gap-1.5 bg-enfield-dark/90 px-2.5 py-1.5 rounded-full border border-white/10">
                     <i class="fa-solid fa-mountain text-bullet-copper"></i>
                     <span class="hidden sm:inline text-gray-400">ALTITUDE:</span>
@@ -467,6 +471,22 @@
                 <button onclick="loadCustomPlaylist()" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-bullet-copper to-amber-600 font-tech font-bold text-white shadow-lg shadow-bullet-copper/30 hover:shadow-bullet-copper/50 active:scale-95 transition-all mt-4">
                     LOAD PLAYLIST
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tracks List Modal -->
+    <div id="tracks-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-panel-glow max-w-md w-full rounded-2xl p-6 border border-white/10 shadow-2xl relative flex flex-col max-h-[85vh]">
+            <button onclick="document.getElementById('tracks-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-title font-bold text-snow-white mb-4"><i class="fa-solid fa-list-ul text-bullet-copper mr-2"></i> Playlist Tracks</h3>
+            <p class="text-xs text-gray-400 mb-4">Click any track to play it instantly. Titles resolve automatically.</p>
+            
+            <!-- Scrollable Track List Container -->
+            <div id="tracks-list" class="flex-1 overflow-y-auto space-y-2 pr-1 font-sans text-sm max-h-[50vh]">
+                <div class="text-gray-400 text-center py-8">Loading tracklist...</div>
             </div>
         </div>
     </div>
@@ -956,13 +976,21 @@
             const discIcon = document.getElementById('disc-icon');
             const eqContainer = document.getElementById('eq-container');
             const badge = document.getElementById('player-status-badge');
+            const ambientWaves = document.getElementById('ambient-waves');
 
             if (event.data === YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 if (playIcon) playIcon.className = 'fa-solid fa-pause text-sm';
                 if (discIcon) discIcon.classList.add('animate-spin-slow');
                 if (eqContainer) eqContainer.classList.remove('opacity-20');
+                if (ambientWaves) ambientWaves.classList.replace('opacity-0', 'opacity-100');
                 
+                // Re-render tracks list to update active track if modal is open
+                const tracksModal = document.getElementById('tracks-modal');
+                if (tracksModal && !tracksModal.classList.contains('hidden')) {
+                    loadPlaylistTracksUI();
+                }
+
                 // Revert any error state badge
                 if (badge) {
                     badge.innerText = 'FM 91.2';
@@ -974,6 +1002,7 @@
                 if (playIcon) playIcon.className = 'fa-solid fa-play text-sm ml-0.5';
                 if (discIcon) discIcon.classList.remove('animate-spin-slow');
                 if (eqContainer) eqContainer.classList.add('opacity-20');
+                if (ambientWaves) ambientWaves.classList.replace('opacity-100', 'opacity-0');
             }
         }
 
@@ -1115,7 +1144,6 @@
         }
 
         function seekTo(event) {
-            if (!ytPlayer || typeof ytPlayer.getDuration !== 'function') return;
             const container = document.getElementById('progress-bar-container');
             if (!container) return;
             const rect = container.getBoundingClientRect();
@@ -1126,6 +1154,77 @@
             if (duration > 0) {
                 const targetTime = (clickX / width) * duration;
                 ytPlayer.seekTo(targetTime, true);
+            }
+        }
+
+        // Tracks Viewer Functions
+        let playlistTrackIDs = [];
+        let trackTitlesCache = {};
+
+        function openTracksModal() {
+            const modal = document.getElementById('tracks-modal');
+            if (modal) modal.classList.remove('hidden');
+            loadPlaylistTracksUI();
+        }
+
+        function loadPlaylistTracksUI() {
+            const container = document.getElementById('tracks-list');
+            if (!container) return;
+
+            if (!ytPlayer || typeof ytPlayer.getPlaylist !== 'function') {
+                container.innerHTML = '<div class="text-gray-400 text-center py-8">Player is initializing...</div>';
+                return;
+            }
+
+            const ids = ytPlayer.getPlaylist();
+            if (!ids || ids.length === 0) {
+                container.innerHTML = '<div class="text-gray-400 text-center py-8">No tracks found. Load and play the music first to load the playlist!</div>';
+                return;
+            }
+
+            playlistTrackIDs = ids;
+            const currentIndex = ytPlayer.getPlaylistIndex();
+
+            container.innerHTML = playlistTrackIDs.map((id, index) => {
+                const title = trackTitlesCache[id] || `Track #${index + 1}`;
+                const isActive = index === currentIndex;
+                const activeClasses = isActive ? 'border-bullet-copper bg-bullet-copper/10 text-white' : 'border-white/5 bg-white/5 text-gray-300 hover:bg-white/10';
+                
+                return `
+                    <div onclick="playTrackAt(${index})" class="flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${activeClasses}">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="font-mono text-xs text-gray-500">${index + 1}</span>
+                            <span class="font-medium truncate text-sm">${title}</span>
+                        </div>
+                        ${isActive ? '<i class="fa-solid fa-volume-high text-bullet-copper text-xs animate-pulse"></i>' : ''}
+                    </div>
+                `;
+            }).join('');
+
+            // Resolve titles asynchronously using public oembed api (No API Key Required!)
+            playlistTrackIDs.forEach((id, index) => {
+                if (!trackTitlesCache[id]) {
+                    fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${id}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data && data.title) {
+                                trackTitlesCache[id] = data.title;
+                                // Update DOM directly if modal is still open
+                                const listItems = container.querySelectorAll('.font-medium');
+                                if (listItems && listItems[index]) {
+                                    listItems[index].innerText = data.title;
+                                }
+                            }
+                        })
+                        .catch(err => console.warn("Failed fetching title for:", id));
+                }
+            });
+        }
+
+        function playTrackAt(index) {
+            if (ytPlayer && typeof ytPlayer.playVideoAt === 'function') {
+                ytPlayer.playVideoAt(index);
+                document.getElementById('tracks-modal').classList.add('hidden');
             }
         }
 
